@@ -1,0 +1,6 @@
+terms:
+- name: insight
+  meaning: Ideia ou hipótese inicial que pode gerar um caso de uso.
+- name: use-case
+  meaning: Representa uma intenção humana estruturada que se transforma em tarefas
+    concretas.

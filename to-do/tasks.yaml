@@ -1,12 +1,9 @@
 tasks:
 - id: T001
-  title: Normalizar números E.164
-  description: Implementar regex universal E.164.
+  title: Implementar autenticação via link mágico
+  description: Permitir login sem senha usando link de email.
   status: in_progress
   owner: ia
   priority: high
-  context:
-    architecture: code-brain/solution-architect/phone-normalization.md
-  acceptance:
-  - 90%+ dos números válidos seguem E.164
-  updated_at: '2025-10-21T11:48:52.509563'
+  related_use_case: UC-001
+  updated_at: '2025-10-22T04:22:09.568142'

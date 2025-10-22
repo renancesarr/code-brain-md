@@ -1,0 +1,39 @@
+schema:
+  version: '1.0'
+  description: 'Define a estrutura cognitiva de negócios: insights (ideias) e use-cases
+    (intenções executáveis).'
+  entities:
+    insight:
+      format: Markdown
+      fields:
+      - id
+      - title
+      - author
+      - description
+      - motivation
+      - status
+      - tags
+      - created_at
+    use_case:
+      format: Markdown
+      fields:
+      - id
+      - title
+      - derived_from
+      - objective
+      - actors
+      - flow
+      - exceptions
+      - value
+      - related_todos
+    business_map:
+      format: YAML
+      fields:
+      - use_case_id
+      - related_insight
+      - related_todos
+  rules:
+  - Todo TO-DO deve estar ligado a um use-case.
+  - Um use-case pode ser inspirado por múltiplos insights.
+  - Insights não são obrigatórios para execução, mas alimentam o processo criativo.
+  - IA deve sempre registrar o vínculo de ação com o use-case original.

@@ -1,32 +1,18 @@
 
-# AGENTS.md — Guia de Consciência para Agentes IA
+# AGENTS.md — Guia de Consciência Code-Brain v5
 
-Este repositório é um ecossistema cognitivo.
-Cada pasta representa uma parte da mente de um agente de IA desenvolvedor.
+Esta versão introduz a camada cognitiva refinada com **insights** e **use-cases**.
 
-## Estrutura Cognitiva
+## Estrutura de Pensamento
 
-- `context-index.yaml`: ponto de partida — descreve a topologia da mente do projeto.
-- `code-brain/to-do/`: define intenções e estados de execução (tarefas).
-- `code-brain/developer/`: raciocínio e execução técnica da IA.
-- `code-brain/memory/`: memória persistente e linha do tempo de eventos.
-- `code-brain/decisions/`: decisões estratégicas e regras de arquitetura.
-- `code-brain/data/`: dicionário de dados e entidades do sistema.
+- **Insights:** ideias brutas, intuições, desejos — espaço filosófico e criativo.
+- **Use-Cases:** intenções organizadas e validadas que geram ações (to-dos).
+- **To-Dos:** tarefas operacionais diretamente ligadas a um use-case.
+- **Developer:** execução técnica e raciocínio da IA.
+- **Memory:** registro e reflexão.
 
-## Ciclo Cognitivo
-
-1. **Percepção** — Ler `context-index.yaml` e entender o ambiente.
-2. **Memória** — Consultar `memory/last-change.yaml` e `ia-log.yaml`.
-3. **Intenção** — Ler `to-do/tasks.yaml` e selecionar a próxima tarefa.
-4. **Planejamento** — Revisar decisões em `decisions/`.
-5. **Ação** — Executar mudanças e registrar em `developer/<timestamp>.yaml`.
-6. **Reflexão** — Atualizar `to-do` e `memory` conforme resultado.
-
-## Regras
-
-- Nunca agir sem ler o contexto.
-- Toda ação deve gerar registro.
-- Toda alteração deve ser contextualizada.
-- A IA deve seguir o modelo cognitivo YAML de cada pasta antes de operar.
-
-O agente não é apenas um executor de código, mas um **membro consciente do projeto**.
+## Regras Cognitivas
+1. Todo TO-DO deve estar vinculado a um único USE-CASE.
+2. Um USE-CASE pode nascer de um ou mais INSIGHTS.
+3. Insights não devem gerar ações diretas, apenas inspirar.
+4. O fluxo natural é: INSIGHT → USE-CASE → TO-DO → EXECUÇÃO → MEMÓRIA.

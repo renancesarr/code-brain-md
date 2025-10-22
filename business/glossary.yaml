@@ -1,6 +1,7 @@
 terms:
 - name: insight
-  meaning: Ideia ou hipótese inicial que pode gerar um caso de uso.
+  meaning: Ideia ou hipótese inicial que pode inspirar um use-case.
 - name: use-case
-  meaning: Representa uma intenção humana estruturada que se transforma em tarefas
-    concretas.
+  meaning: Intenção humana estruturada que gera to-dos executáveis.
+- name: magic link
+  meaning: Link com token temporário que autentica o usuário sem senha.

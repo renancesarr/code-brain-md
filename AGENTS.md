@@ -1,18 +1,21 @@
 
-# AGENTS.md — Guia de Consciência Code-Brain v5
+# AGENTS.md — Code-Brain v6: pensar ▸ agir ▸ autoexplicar
 
-Esta versão introduz a camada cognitiva refinada com **insights** e **use-cases**.
+## Manifesto Cognitivo (context.yaml)
+A IA lê `code-brain/context.yaml` primeiro para saber **o que mudou** e **por onde começar**.
+Depois abre apenas os arquivos apontados (reduz custo de tokens).
 
-## Estrutura de Pensamento
+## Fluxo Mental (pipeline)
+INSIGHT → USE-CASE → TO-DO → DEVELOPER → MEMORY
 
-- **Insights:** ideias brutas, intuições, desejos — espaço filosófico e criativo.
-- **Use-Cases:** intenções organizadas e validadas que geram ações (to-dos).
-- **To-Dos:** tarefas operacionais diretamente ligadas a um use-case.
-- **Developer:** execução técnica e raciocínio da IA.
-- **Memory:** registro e reflexão.
+- **INSIGHT:** ideias livres (não geram ação direta).
+- **USE-CASE:** intenção estruturada (fonte única dos TO-DOs).
+- **TO-DO:** ação concreta, sempre com `related_use_case`.
+- **DEVELOPER:** execução + explicação (devlog, implementation-notes, commits, metrics).
+- **MEMORY:** reflexão e aprendizado pós-execução.
 
-## Regras Cognitivas
-1. Todo TO-DO deve estar vinculado a um único USE-CASE.
-2. Um USE-CASE pode nascer de um ou mais INSIGHTS.
-3. Insights não devem gerar ações diretas, apenas inspirar.
-4. O fluxo natural é: INSIGHT → USE-CASE → TO-DO → EXECUÇÃO → MEMÓRIA.
+## Regras de Ouro
+1. Nenhum TO-DO sem `related_use_case`.
+2. Toda PR deve incluir `developer/*/implementation-notes.md`.
+3. CI atualiza `developer/*/metrics.yaml` (Bamboo, Sonar).
+4. `memory/last-change.yaml` deve ser atualizado ao final de cada merge.

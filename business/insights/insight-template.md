@@ -1,17 +1,17 @@
 ---
 id: IN-000
 title: [Título do insight]
-author: [Pessoa ou IA que gerou o insight]
+author: [Pessoa ou IA]
 created_at: 2025-10-22T00:00:00Z
 status: draft
 tags: [ideia, inovação]
 ---
 
 ## Descrição
-Explique a ideia livremente, sem se preocupar com estrutura técnica.
+Explique a ideia livremente.
 
 ## Motivação
-Por que essa ideia importa? O que ela resolveria?
+Por que importa?
 
 ## Possíveis Caminhos
 - [ ] Opção 1

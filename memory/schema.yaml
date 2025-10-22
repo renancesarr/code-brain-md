@@ -1,0 +1,28 @@
+schema:
+  description: Modelo de memória cognitiva persistente da IA.
+  fields:
+    ia_log:
+      actor:
+      - ia
+      - human
+      confidence: float
+      event: string
+      notes: string
+      outcome: string
+      requires_followup: boolean
+      ts: datetime
+    last_change:
+      id: integer
+      result:
+      - success
+      - failure
+      - partial
+      summary: string
+  instructions:
+  - Atualizar last-change.yaml a cada ação.
+  - Registrar logs resumidos em ia-log.yaml.
+  memory_types:
+  - last_change
+  - ia_log
+  - checkpoints
+  version: '1.0'

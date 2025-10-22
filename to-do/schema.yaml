@@ -1,0 +1,45 @@
+schema:
+  description: Define formato e estados do backlog cognitivo para agentes de IA.
+  instructions:
+  - IA deve atualizar tasks.yaml ao mudar status.
+  - Quando status='done', mover tarefa para archive.yaml.
+  status_transitions:
+    blocked:
+    - in_progress
+    done: []
+    in_progress:
+    - review
+    - blocked
+    queued:
+    - in_progress
+    - blocked
+    review:
+    - done
+    - blocked
+  task_fields:
+    acceptance: list
+    ambiguous:
+      description: Indica se a IA considera o contexto ambíguo
+      type: boolean
+    context: object
+    description: string
+    estimated_confidence:
+      description: Expectativa da IA de sucesso para esta tarefa (0-1)
+      type: float
+    id: string
+    owner:
+    - human
+    - ia
+    priority:
+    - low
+    - medium
+    - high
+    status:
+    - queued
+    - in_progress
+    - blocked
+    - review
+    - done
+    title: string
+    updated_at: datetime
+  version: '1.0'

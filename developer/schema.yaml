@@ -1,0 +1,37 @@
+schema:
+  description: Modelo de raciocínio e execução da IA desenvolvedora.
+  fields:
+    actor:
+    - ia
+    - human
+    based_on:
+      task: string
+      template: string
+    follow_up:
+      human_review_needed: boolean
+      next_tasks: list
+    id: integer
+    implementation:
+      approach: string
+      files_touched: list
+      tests_added: string
+      uncertainty:
+        description: Confiança da IA em sua solução (0 a 1)
+        type: float
+    objective:
+      constraints: list
+      goal: string
+      problem: string
+    outcome:
+      metrics: object
+      status:
+      - success
+      - failure
+      - partial
+    reflection:
+      confidence_shift: float
+      learning: string
+      surprises: string
+      triggered_reconsideration: boolean
+    timestamp: datetime
+  version: '1.0'

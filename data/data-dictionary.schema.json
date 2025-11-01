@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "code-brain/data-dictionary",
+  "type": "object",
+  "required": ["data_dictionary"],
+  "additionalProperties": false,
+  "properties": {
+    "data_dictionary": {
+      "type": "object",
+      "required": ["version", "updated_at", "entities"],
+      "properties": {
+        "version": { "type": "string" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "table", "fields"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "pattern": "^([A-Z][a-zA-Z0-9]+)$" },
+              "table": { "type": "string", "pattern": "^([a-z0-9_]+)$" },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["name", "type", "constraints"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": { "type": "string", "pattern": "^([a-z0-9_]+)$" },
+                    "type": { "type": "string", "enum": ["string", "integer", "number", "boolean", "date-time", "uuid"] },
+                    "format": { "type": "string" },
+                    "constraints": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "nullable": { "type": "boolean" },
+                        "unique": { "type": "boolean" },
+                        "default": {},
+                        "check": { "type": "string" },
+                        "references": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "table": { "type": "string" },
+                            "column": { "type": "string" },
+                            "on_delete": { "type": "string", "enum": ["RESTRICT", "CASCADE", "SET_NULL"] }
+                          },
+                          "required": ["table", "column"]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "indexes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["name", "columns"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": { "type": "string" },
+                    "unique": { "type": "boolean" },
+                    "columns": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              "relations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["type", "with", "fk"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": { "type": "string", "enum": ["one_to_many", "many_to_one", "one_to_one", "many_to_many"] },
+                    "with": { "type": "string" },
+                    "fk": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

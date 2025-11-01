@@ -1,0 +1,51 @@
+# code-brain/to-do/tasks.template.yaml
+# Template canônico do backlog. Use apenas para guiar a criação do `tasks.yaml`.
+# Não inclua tarefas aqui. Este arquivo deve permanecer SEM entries em `tasks`.
+# Valide `tasks.yaml` no CI contra `code-brain/to-do/tasks.schema.json`.
+
+meta:
+  version: "2.0"                      # versão do formato do backlog
+  updated_at: "YYYY-MM-DDTHH:MM:SSZ"  # data/hora UTC (ISO 8601 Z)
+  id_format: "^T-\\d{4}$"             # formato recomendado de IDs de tarefa (ex.: T-0001)
+
+# Campos obrigatórios por tarefa em tasks.yaml:
+# - id:           string (regex ^T-\d{4}$)
+# - title:        string curta, objetiva
+# - description:  1–2 linhas, por que/para quê
+# - status:       one of [todo, doing, review, blocked, done]
+# - priority:     one of [P0, P1, P2, P3]   (P0 = bloqueia release)
+# - related_use_case: string (regex ^UC-\d{4}$)
+# - decisions:    array de ADRs (ex.: ["ADR-0001"])
+# - insights:     array de INs  (ex.: ["IN-0001"])
+# - depends_on:   array de IDs T-000x (ordena execução)
+# - acceptance_criteria: array de resultados verificáveis (checklist)
+# - test_plan:    array de passos de validação (cURLs/CI/etc.)
+# - rollback_plan:string curto de como desfazer
+# - assignees:    array de agentes/pessoas responsáveis
+# - updated_at:   string ISO 8601 Z
+
+tasks: []
+  # ---------------------------------------------------------------------------
+  # NUNCA adicione tarefas neste template.
+  # Copie este arquivo para `code-brain/to-do/tasks.yaml` e então preencha lá.
+  # ---------------------------------------------------------------------------
+
+  # Exemplos (comentados) para referência — REMOVA ao criar o tasks.yaml:
+  # - id: "T-0001"
+  #   title: "Título objetivo"
+  #   description: "Por que/para quê em 1–2 linhas."
+  #   status: "todo"             # todo|doing|review|blocked|done
+  #   priority: "P2"             # P0|P1|P2|P3
+  #   related_use_case: "UC-0001"
+  #   decisions: []              # ["ADR-0001"]
+  #   insights: []               # ["IN-0001"]
+  #   depends_on: []             # ["T-000X"]
+  #   acceptance_criteria:
+  #     - "Resultado verificável 1"
+  #     - "Resultado verificável 2"
+  #   test_plan:
+  #     - "Passo de validação 1 (curl/CI)"
+  #     - "Passo de validação 2"
+  #   rollback_plan: "Como desfazer com segurança."
+  #   assignees: ["rnr-dao-router"]
+  #   updated_at: "YYYY-MM-DDTHH:MM:SSZ"

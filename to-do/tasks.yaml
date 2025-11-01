@@ -1,9 +1,22 @@
+meta:
+  version: "2.0"
+  updated_at: "2025-10-30T00:00:00Z"
+  id_format: "^T-\\d{4}$"
+
 tasks:
-- id: T001
-  title: Implementar autenticação via link mágico
-  description: Permitir login sem senha usando link de email com JWT temporário.
-  status: in_progress
-  owner: ia
-  priority: high
-  related_use_case: UC-001
-  updated_at: '2025-10-22T05:40:42.785614Z'
+  # ====================== LOTE A — BOOT MÍNIMO + HEALTH /api ======================
+
+  - id: "T-3000"
+    title: "Criar diretório do repositório"
+    description: "Criar pasta do projeto no filesystem."
+    status: "done"
+    priority: "P3"
+    related_use_case: "UC-0001"
+    decisions: []
+    insights: []
+    depends_on: []
+    acceptance_criteria: ["Pasta existe e está vazia"]
+    test_plan: ["ls -la (lista vazia exceto . e ..)"]
+    rollback_plan: "Deletar a pasta"
+    assignees: ["rnr-context-curator"]
+    updated_at: "2025-10-30T09:02:53Z"

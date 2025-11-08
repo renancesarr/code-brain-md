@@ -1,10 +1,82 @@
+# Estado operacional atual do projeto Code-Brain
+# Complementa context-index.yaml que contém o mapeamento estrutural
+
 context:
-  last_update: '2025-10-22T05:40:42.734332Z'
-  active_use_case: UC-001
-  current_todos:
-  - T001
-  insights_under_review: []
-  reading_order:
-  - code-brain/business/use-cases/UC-001-login-user.md
-  - code-brain/to-do/tasks.yaml
-  - code-brain/developer/UC-001-login-user/devlog.md
+  # Metadados do estado atual
+  last_update: "2025-11-08T00:00:00Z"
+  active_branch: "main"
+  current_phase: "mvp-1"
+
+  # Tasks ativas e seu estado
+  active_tasks:
+    current:
+      - id: "T-001"
+        description: "Adicionar validação YAML/Markdown"
+        status: "in-progress"
+        eta: "2025-11-09"
+    pending:
+      - id: "T-002"
+        description: "Documentar uso e exemplos"
+        priority: 1
+
+  # Contexto de execução atual
+  execution_context:
+    reading_order:
+      - "prompt.yaml"
+      - "AGENTS.md"
+      - "code-brain/project-guide.md"
+      - "code-brain/to-do/tasks.yaml"
+    
+    ai_processing:
+      token_budget: 8000
+      max_files_per_read: 5
+      read_last_n_logs: 3
+
+  # Pipeline de execução
+  pipeline_stages:
+    - stage: "PLAN"
+      required: true
+      description: "Análise e planejamento da ação"
+    - stage: "READ"
+      required: true
+      description: "Leitura de contexto necessário"
+    - stage: "PATCH"
+      required: false
+      description: "Implementação das mudanças"
+    - stage: "TEST"
+      required: true
+      description: "Validação das mudanças"
+    - stage: "NEXT"
+      required: true
+      description: "Definição próximos passos"
+
+  # Regras de governança
+  governance:
+    update_task_status: true
+    create_dev_notes: true
+    validate_changes: true
+
+  # Validação de ambiente
+  environment:
+    required_tools:
+      - "git"
+      - "python3"
+      - "yamllint"
+
+  # Estado do ciclo atual
+  cycle_state:
+    last_task_completed: "Adicionar seção 'Prompt context' no template"
+    tasks_since_retrospective: 3
+    pending_validations:
+      - "Validar sintaxe YAML em templates"
+      - "Verificar conformidade Markdown"
+
+  # MVP-1 Tracking
+  mvp_tracking:
+    features_implemented:
+      - "Sistema básico de context.yaml"
+      - "Templates fundamentais"
+    pending_features:
+      - "Validação de documentação básica"
+      - "Estrutura completa de use-cases"
+    next_milestone: "Implementar validadores básicos"

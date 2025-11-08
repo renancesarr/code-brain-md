@@ -1,0 +1,67 @@
+# Estado operacional atual do projeto
+# Complementa context-index.yaml que contém o mapeamento estrutural
+
+context:
+  # Metadados do estado atual
+  last_update: "2025-11-08T00:00:00Z"
+  active_branch: "main"
+  current_phase: "mvp-1"  # Referência ao MVP atual do project-guide.md
+
+  # Tasks ativas e seu estado
+  active_tasks:
+    current:
+      - id: "T-0001"
+        status: "in-progress"
+        eta: "2025-11-10"
+    pending:
+      - id: "T-0002"
+        priority: 1
+      - id: "T-0003"
+        priority: 2
+
+  # Contexto de execução atual
+  execution_context:
+    # Ordem de processamento atual (paths relativos)
+    reading_order:
+      - "prompt.txt"
+      - "AGENTS.md"
+      - "code-brain/to-do/tasks.yaml"
+    
+    # Configurações de processamento
+    ai_processing:
+      token_budget: 8000  # Tokens disponíveis por iteração
+      max_files_per_read: 5  # Máximo de arquivos por ciclo
+      read_last_n_logs: 3  # Número de logs anteriores a considerar
+
+  # Pipeline de execução
+  pipeline_stages:
+    - stage: "PLAN"   # Planejamento da ação
+      required: true
+    - stage: "READ"   # Leitura de contexto
+      required: true
+    - stage: "PATCH"  # Modificações
+      required: false
+    - stage: "TEST"   # Validação
+      required: true
+    - stage: "NEXT"   # Próximos passos
+      required: true
+
+  # Regras de governança
+  governance:
+    update_task_status: true  # Atualizar status de tasks
+    create_dev_notes: true    # Criar notas de desenvolvimento
+    validate_changes: true    # Validar mudanças antes de commit
+
+  # Validação de ambiente
+  environment:
+    required_tools:
+      - "git"
+      - "python3"
+      - "yamllint"
+    required_files: []  # Lista vazia pois está definida em context-index.yaml
+
+  # Estado do ciclo atual
+  cycle_state:
+    last_task_completed: null
+    tasks_since_retrospective: 0
+    pending_validations: []

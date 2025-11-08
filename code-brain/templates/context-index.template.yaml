@@ -1,0 +1,63 @@
+# Context Index - Mapeamento de recursos e estruturas do projeto
+# Este arquivo mapeia todos os recursos disponíveis e suas localizações
+
+version: "1.0"
+
+# Mapeamento de diretórios principais e seus propósitos
+directories:
+  insights: "insights/"          # Ideias e inspirações
+  usecases: "usecases/"         # Use cases documentados
+  todo: "code-brain/to-do/"     # Tasks e backlog
+  developer: "code-brain/developer/"  # Logs e notas de desenvolvimento
+  git: "code-brain/git/"        # Políticas e templates Git
+  templates: "code-brain/templates/"  # Templates do projeto
+
+# Arquivos fundamentais e seus propósitos
+core_files:
+  agents: "AGENTS.md"           # Manifesto e regras dos agentes
+  project_guide: "code-brain/project-guide.md"  # Guia geral do projeto
+  context: "context.yaml"       # Estado operacional atual
+  prompt: "prompt.txt"          # Prompt base para agentes
+
+# Schemas e validações
+schemas:
+  todo: "code-brain/to-do/tasks.schema.json"
+  context: "code-brain/templates/context.schema.yaml"
+  data: "code-brain/data/data-dictionary.schema.json"
+
+# Padrões de nomenclatura e organização
+patterns:
+  usecase_files: "^UC-[0-9]{3}-.+\\.md$"
+  ai_logs: "^[0-9]{10,}-ia-code\\.md$"
+  dev_notes: "^[0-9]{8}-dev-notes\\.md$"
+
+# Templates disponíveis
+templates:
+  developer_notes: "code-brain/developer/developer-notes.template.md"
+  project_guide: "code-brain/project-guide.template.md"
+  workflow: "code-brain/git/workflow-template.md"
+  usecase: "code-brain/usecases/template.md"
+
+# Validações estruturais
+required_structure:
+  directories:
+    - "code-brain/to-do/"
+    - "code-brain/developer/logs-ai-code/"
+    - "code-brain/git/"
+    - "usecases/"
+  files:
+    - "AGENTS.md"
+    - "context.yaml"
+    - "prompt.txt"
+    - "code-brain/project-guide.md"
+
+# Políticas de governança
+governance:
+  file_ownership:
+    user_controlled:
+      - "context.yaml"     # Apenas usuário modifica
+      - "prompt.txt"       # Apenas usuário modifica
+    ai_controlled:
+      - "code-brain/developer/logs-ai-code/"  # IA pode criar/modificar
+    shared:
+      - "code-brain/to-do/tasks.yaml"  # Ambos podem modificar

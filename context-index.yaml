@@ -1,20 +1,70 @@
+# Context Index - Mapeamento estrutural do projeto Code-Brain
+# Versão MVP-1: Framework Base
+
+version: "1.0.0-mvp1"
+
 project:
-  name: RNR-Atendente
-  version: '1.0'
-  description: Infraestrutura cognitiva modular para agentes de IA desenvolvedores.
-  mission: Permitir que agentes artificiais mantenham coerência e continuidade em
-    projetos de software.
-context:
-  business_rules: code-brain/business-model/schema.yaml
-  architecture: code-brain/solution-architect/schema.yaml
-  data_dictionary: code-brain/data/data-dictionary.yaml
-  backlog: code-brain/to-do/tasks.yaml
-  decisions: code-brain/decisions/
-  memory: code-brain/memory/
-  developer_journal: code-brain/developer/
+  name: "Code-Brain"
+  description: "Framework de desenvolvimento com IA integrada"
+  mission: "Criar um fluxo de trabalho inteligente que integra IA no processo de desenvolvimento"
+
+directories:
+  todo: "code-brain/to-do/"
+  developer: "code-brain/developer/"
+  git: "code-brain/git/"
+  templates: "code-brain/templates/"
+  data: "code-brain/data/"
+
+core_files:
+  agents: "AGENTS.md"
+  project_guide: "code-brain/project-guide.md"
+  context: "context.yaml"
+  prompt: "prompt.yaml"
+  backlog: "backlog_anatomico_unificado_padronizado.md"
+
+schemas:
+  todo: "code-brain/to-do/tasks.schema.json"
+  data: "code-brain/data/data-dictionary.schema.json"
+
+patterns:
+  ai_logs: "^[0-9]{10,}-ia-code\\.md$"
+  dev_notes: "^[0-9]{8}-dev-notes\\.md$"
+
+templates:
+  developer_notes: "code-brain/developer/developer-notes.template.md"
+  project_guide: "code-brain/project-guide.template.md"
+  workflow: "code-brain/git/workflow-template.md"
+
+required_structure:
+  directories:
+    - "code-brain/to-do/"
+    - "code-brain/developer/logs-ai-code/"
+    - "code-brain/git/"
+    - "code-brain/templates/"
+    - "code-brain/data/"
+  files:
+    - "AGENTS.md"
+    - "context.yaml"
+    - "prompt.yaml"
+    - "code-brain/project-guide.md"
+    - "code-brain/to-do/tasks.yaml"
+    - "code-brain/to-do/tasks.schema.json"
+
+governance:
+  file_ownership:
+    user_controlled:
+      - "context.yaml"
+      - "prompt.yaml"
+      - "backlog_anatomico_unificado_padronizado.md"
+    ai_controlled:
+      - "code-brain/developer/logs-ai-code/"
+      - "code-brain/developer/code-planning.md"
+    shared:
+      - "code-brain/to-do/tasks.yaml"
+
 principles:
-- Ler antes de agir.
-- Respeitar decisões anteriores.
-- Manter consistência de estilo e objetivos.
-- Registrar tudo o que foi feito.
-- Criticar a si mesmo ao final de cada ação.
+  - "Ler antes de agir"
+  - "Respeitar decisões anteriores"
+  - "Manter consistência de estilo e objetivos"
+  - "Registrar tudo o que foi feito"
+  - "Criticar a si mesmo ao final de cada ação"

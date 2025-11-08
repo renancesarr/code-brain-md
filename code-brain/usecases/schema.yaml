@@ -1,9 +1,3 @@
-# Schema para validação dos Use Cases
-# usecase-schema.yaml
-$schema: http://json-schema.org/draft-07/schema#
-
-```yaml
-# usecase-schema.yaml
 schema: http://json-schema.org/draft-07/schema#
 title: Use Case Schema
 type: object
@@ -295,4 +289,3 @@ properties:
             date:
               type: string
               format: date
-```

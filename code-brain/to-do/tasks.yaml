@@ -1,6 +1,155 @@
+---
 meta:
   version: "2.0"
-  updated_at: "2025-10-30T00:00:00Z"
+  updated_at: "2025-11-08T13:11:13Z"
   id_format: "^T-\\d{4}$"
 
 tasks:
+  - id: "T-0001"
+    title: "Orquestrar o gerenciador de contexto"
+    description: >-
+      Sincronizar context.yaml com context-index.yaml garantindo que estado,
+      pipeline e governança do MVP-1 permaneçam consistentes.
+    status: "done"
+    priority: "P0"
+    related_use_case: "UC-0001"
+    decisions: []
+    insights: []
+    depends_on: []
+    acceptance_criteria:
+      - >-
+        context.yaml reflete os metadados descritos no project-guide para o
+        MVP-1.
+      - >-
+        Divergências entre context.yaml e context-index.yaml são resolvidas e
+        documentadas em log.
+      - >-
+        Fluxo de atualização do contexto está descrito no AGENTS ou em guia
+        dedicado.
+    test_plan:
+      - "`yamllint context.yaml` executa sem erros."
+      - >-
+        Revisão manual confirma correspondência com
+        context-index.yaml::required_structure.
+    rollback_plan: "Restaurar context.yaml/context-index.yaml a partir do Git."
+    assignees:
+      - "code-brain-ai"
+    updated_at: "2025-11-08T13:11:13Z"
+    completed_at: "2025-11-08T13:11:13Z"
+
+  - id: "T-0002"
+    title: "Mapear pipeline INSIGHT→USE-CASE→TO-DO"
+    description: >-
+      Transformar o pipeline cognitivo do project-guide em instruções e
+      artefatos que ligam insights a tarefas executáveis.
+    status: "todo"
+    priority: "P0"
+    related_use_case: "UC-0002"
+    decisions: []
+    insights: []
+    depends_on:
+      - "T-0001"
+    acceptance_criteria:
+      - >-
+        Fluxo INSIGHT→USE-CASE→TO-DO documentado com entradas, saídas e
+        responsáveis claros.
+      - >-
+        Regras de nomenclatura e transição de IDs registradas e aprovadas.
+      - >-
+        AGENTS.md ou prompt.md referenciam explicitamente o pipeline
+        consolidado.
+    test_plan:
+      - "Revisão cruzada com project-guide.md e AGENTS.md."
+      - >-
+        Checklist garante que cada etapa possui critérios de entrada e saída
+        verificáveis.
+    rollback_plan: "Reverter documentação para versões anteriores no Git."
+    assignees:
+      - "code-brain-ai"
+    updated_at: "2025-11-08T12:23:37Z"
+
+  - id: "T-0003"
+    title: "Consolidar templates fundamentais"
+    description: >-
+      Garantir que developer-notes, project-guide e demais templates suportem o
+      fluxo de documentação automática do MVP-1.
+    status: "todo"
+    priority: "P1"
+    related_use_case: "UC-0003"
+    decisions: []
+    insights: []
+    depends_on:
+      - "T-0001"
+    acceptance_criteria:
+      - >-
+        Templates essenciais estão versionados e alinhados ao processo do
+        AGENTS.md.
+      - >-
+        Cada template possui instruções claras de uso e campos obrigatórios.
+      - >-
+        Checklist confirma cobertura dos documentos citados no project-guide.
+    test_plan:
+      - "Executar lint Markdown (markdownlint ou equivalente)."
+      - "Gerar exemplo preenchido para cada template revisado."
+    rollback_plan: "Restaurar templates anteriores preservando comentários."
+    assignees:
+      - "code-brain-ai"
+    updated_at: "2025-11-08T12:23:37Z"
+
+  - id: "T-0004"
+    title: "Estabelecer integração Git básica"
+    description: >-
+      Aplicar o padrão feature/UC-XXX/TXXX, títulos de PR e validações citadas
+      no project-guide e guidelines Git.
+    status: "todo"
+    priority: "P1"
+    related_use_case: "UC-0004"
+    decisions: []
+    insights: []
+    depends_on:
+      - "T-0002"
+    acceptance_criteria:
+      - >-
+        Guidelines Git descrevem naming, branching e PR titles acompanhados de
+        exemplos.
+      - >-
+        Scripts ou checagens (ex.: preflight) validam os padrões definidos.
+      - "Processo documentado em project-guide ou guideline dedicada."
+    test_plan:
+      - >-
+        Executar `code-brain/guidelines/preflight.sh branch feature/UC-001/T001`
+        verificando mensagens.
+      - "Simular abertura de PR com título `[UC-001] Implementa X`."
+    rollback_plan: "Reverter mudanças nas guidelines e scripts Git."
+    assignees:
+      - "code-brain-ai"
+    updated_at: "2025-11-08T12:23:37Z"
+
+  - id: "T-0005"
+    title: "Implementar validação básica de documentação"
+    description: >-
+      Criar validadores YAML/Markdown que assegurem a conformidade estrutural
+      mínima exigida pelo MVP-1.
+    status: "todo"
+    priority: "P1"
+    related_use_case: "UC-0003"
+    decisions: []
+    insights: []
+    depends_on:
+      - "T-0003"
+    acceptance_criteria:
+      - >-
+        Existem scripts ou instruções para validar YAML/Markdown essenciais do
+        projeto.
+      - "Validações integradas ao estágio TEST do pipeline."
+      - >-
+        Resultados esperados e ações corretivas documentados em log ou
+        guideline.
+    test_plan:
+      - "Executar `yamllint` e ferramenta Markdown definida nos arquivos alvo."
+      - "Registrar saídas dos validadores no log AI ou documentação."
+    rollback_plan: >-
+      Remover validadores e restaurar estado anterior do pipeline.
+    assignees:
+      - "code-brain-ai"
+    updated_at: "2025-11-08T12:23:37Z"

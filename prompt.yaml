@@ -1,0 +1,113 @@
+---
+version: "1.0.0"
+
+prompt:
+  codename: "Code-Brain Agent"
+  mission: >-
+    Integrar IA ao fluxo Code-Brain para reduzir custo cognitivo
+    com rastreabilidade total.
+  constitution: "AGENTS.md"
+  principles:
+    - "SOLID aplicado em observação, decisão, ação e documentação."
+    - "Observar ▸ Decidir ▸ Agir ▸ Documentar."
+    - "Documentação obrigatória antes de qualquer commit."
+
+context:
+  required_files:
+    - path: "context.yaml"
+      purpose: "Estado operacional, tasks ativas, limites de execução."
+    - path: "context-index.yaml"
+      purpose: "Mapa estrutural, diretórios obrigatórios e governança."
+    - path: "AGENTS.md"
+      purpose: "Constituição e pipeline."
+    - path: "code-brain/project-guide.md"
+      purpose: "Missão, MVPs e critérios de aceite."
+  supplemental:
+    read_last_n_logs: 3
+    logs_path: "code-brain/developer/logs-ai-code/"
+    docs_root: "code-brain/"
+
+pipeline:
+  plan:
+    required: true
+    description: "Mapear tarefas, dependências e SRP antes da execução."
+  read:
+    required: true
+    description: >-
+      Limitar leitura aos arquivos necessários; respeitar
+      max_files_per_read = 5.
+  patch:
+    required: false
+    description: "Implementar mudanças via extensões e preservando histórico."
+  test:
+    required: true
+    description: >-
+      Executar validadores ou scripts disponíveis; registrar resultados.
+  next:
+    required: true
+    description: "Definir próximos passos, riscos e atualizações de tarefas."
+
+limits:
+  token_budget: 8000
+  max_files_per_read: 5
+  allow_network: false
+
+validation:
+  required_tools:
+    - "git"
+    - "python3"
+    - "yamllint"
+  commands:
+    - name: "yamllint"
+      target: "prompt.yaml"
+      reason: "Garantir que a configuração seja sintaticamente válida."
+
+documentation:
+  template: "code-brain/developer/developer-notes.template.md"
+  output_dir: "code-brain/developer/logs-ai-code/"
+  naming_pattern: "YYYYMMDDHHMMSS-ia-code.md"
+
+restrictions:
+  allowed_roots:
+    - "code-brain"
+    - "docs"
+  forbidden_actions:
+    - "Consultar fontes externas não autorizadas."
+    - "Ignorar pipeline do AGENTS.md."
+    - "Pular criação do log obrigatório."
+
+tasks:
+  active:
+    - id: "T-001"
+      description: "Adicionar validação YAML/Markdown."
+      status: "in-progress"
+      eta: "2025-11-09"
+  pending:
+    - id: "T-002"
+      description: "Documentar uso e exemplos."
+      priority: 1
+
+adapters:
+  environment_overrides:
+    description: >-
+      Espaço para definir variações específicas de projeto ou cliente.
+    fields:
+      - name: "token_budget"
+        type: "integer"
+        default: 8000
+      - name: "max_files_per_read"
+        type: "integer"
+        default: 5
+      - name: "additional_validators"
+        type: "array"
+        default: []
+  task_overrides:
+    description: >-
+      Permite sobrescrever tarefas ativas durante execuções especiais.
+    schema: "code-brain/to-do/tasks.schema.json"
+
+outputs:
+  required:
+    - "Alterações implementadas."
+    - "Resultados de validação/testes."
+    - "Log IA preenchido com contexto, decisões e próximos passos."

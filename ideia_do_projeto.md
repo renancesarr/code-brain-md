@@ -3,6 +3,7 @@
 ## Introduction
 
 ## Main Ideias
+
 deve ter a ideia geral do projeto colocando os principais casos de usos em topicos
 
 
@@ -15,6 +16,4 @@ explica o que seria o mvp dessa ideia e descreve o principal produto a ser entre
 
 ## product
 
-Explica o produto idealizado. COmo seria ele no auge. 
-
-
+Explica o produto idealizado. COmo seria ele no auge.

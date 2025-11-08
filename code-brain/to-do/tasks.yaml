@@ -1,0 +1,6 @@
+meta:
+  version: "2.0"
+  updated_at: "2025-10-30T00:00:00Z"
+  id_format: "^T-\\d{4}$"
+
+tasks:

@@ -1,0 +1,50 @@
+schema:
+  version: "2.0"
+  description: Modelo canônico do dicionário de dados do projeto (machine-friendly).
+  conventions:
+    entity_id_format: "^([A-Z][a-zA-Z0-9]+)$"         # Aluno, Publicacao, Instituicao...
+    table_name_format: "^([a-z0-9_]+)$"               # snake_case plural: alunos, publicacoes...
+    column_name_format: "^([a-z0-9_]+)$"              # snake_case: aluno_id, created_at...
+    date_format: "ISO-8601 (Z)"
+    id_type: "uuid"
+  types:
+    # tipos primitivos autorizados
+    - string
+    - integer
+    - number
+    - boolean
+    - date-time
+    - uuid
+  formats:
+    # formatos opcionais para validar strings
+    - cpf
+    - rg
+    - uf
+    - ip
+    - hostname
+  constraints_model:
+    # contrato das constraints por campo
+    required_keys:
+      - nullable       # true|false (default: false = NOT NULL)
+      - unique         # true|false
+      - default        # literal ou função (e.g., now())
+      - check          # expressão ou regex (informativa)
+      - references     # { table: <tabela>, column: <coluna>, on_delete: RESTRICT|CASCADE|SET_NULL }
+  entity_model:
+    required_keys:
+      - id            # nome da entidade (e.g., Aluno)
+      - table         # nome da tabela (e.g., alunos)
+      - fields        # lista de campos
+    field_required_keys:
+      - name          # nome da coluna (snake_case)
+      - type          # ver `types`
+      - format        # opcional; ver `formats`
+      - constraints   # objeto segundo `constraints_model`
+    optional_keys:
+      - indexes       # lista de índices
+      - relations     # FK/relacionamentos de alto nível
+  rules:
+    - "IA deve respeitar tipos e constraints ao criar/alterar campos."
+    - "Todos os campos devem ser validados pelo dicionário (CI falha se não aderente)."
+    - "IDs são uuid, datas são ISO-8601 (Z)."
+    - "Nome de tabelas/colunas em snake_case; entidades em PascalCase."

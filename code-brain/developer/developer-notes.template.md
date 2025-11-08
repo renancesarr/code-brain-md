@@ -2,11 +2,10 @@
 
 > Salvar como `code-brain/developer/logs-ai-code/<timestamp>-ia-code.md`
 
-## 1. Contexto consumido
-- docs principais lidos:
-- outros (PRs/ADRs/issues/old-api):
+## 1. Contexto consumido <!--lista dos docs principais lidos -->
 
 ## 2. Objetivo da alteração
+
 - resumo (1 linha):
 - escopo (inclui/exclui):
 

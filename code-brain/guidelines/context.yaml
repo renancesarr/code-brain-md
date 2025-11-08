@@ -1,0 +1,123 @@
+version: '1.0'
+description: Sistema de contexto dinâmico para guidelines do Code-Brain
+
+# Contextos operacionais
+contexts:
+  git:
+    # Contexto: Criação de feature
+    feature_creation:
+      triggers:
+        - new_branch
+        - first_commit
+      required_guidelines:
+        - git/guidelines.md#branch_rules
+        - git/workflow-template.md
+        - git/commit-convention.md
+      validation_level: strict
+
+    # Contexto: Pull Request
+    pull_request:
+      triggers:
+        - push_to_remote
+        - create_pr
+      required_guidelines:
+        - git/guidelines.md#pr_rules
+        - git/pr-template.md
+      validation_level: strict
+
+    # Contexto: Code Review
+    review:
+      triggers:
+        - pr_review_requested
+      required_guidelines:
+        - git/guidelines.md#review_rules
+      validation_level: advisory
+
+    # Contexto: Merge
+    merge:
+      triggers:
+        - pr_approved
+        - merge_requested
+      required_guidelines:
+        - git/guidelines.md#merge_rules
+        - git/workflow-template.md#post_merge
+      validation_level: strict
+
+  # Outros contextos podem ser adicionados aqui (CI/CD, docs, etc)
+
+# Ações comuns e guidelines relacionadas
+actions:
+  start_feature:
+    context: git.feature_creation
+    steps:
+      - check_branch_name
+      - validate_first_commit
+    guidelines:
+      - workflow
+      - commit
+
+  create_pr:
+    context: git.pull_request
+    steps:
+      - validate_branch
+      - check_commits
+      - generate_pr
+    guidelines:
+      - pr_template
+      - review_rules
+
+  review_code:
+    context: git.review
+    steps:
+      - check_guidelines
+      - validate_changes
+    guidelines:
+      - review_rules
+
+  merge_pr:
+    context: git.merge
+    steps:
+      - validate_approvals
+      - check_ci
+      - execute_merge
+    guidelines:
+      - merge_rules
+      - cleanup
+
+# Validadores disponíveis
+validators:
+  branch_name:
+    pattern: "^feature/[A-Z]+-[0-9]+/.+$"
+    example: "feature/UC-001/add-login"
+    
+  commit_message:
+    pattern: "^(feat|fix|docs|style|refactor|test|chore)\\(.+\\): .+$"
+    example: "feat(auth): implement login"
+    
+  pr_title:
+    pattern: "^\\[UC-[0-9]+\\] .+$"
+    example: "[UC-001] Implement user authentication"
+
+# Regras de execução
+execution:
+  pre_action:
+    - load_context
+    - validate_requirements
+    - check_permissions
+  
+  post_action:
+    - validate_result
+    - log_execution
+    - update_context
+
+# Sistema de logs
+logging:
+  enabled: true
+  file: guidelines.log.yaml
+  format: yaml
+  required_fields:
+    - timestamp
+    - action
+    - context
+    - result
+    - validation

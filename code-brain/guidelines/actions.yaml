@@ -1,0 +1,115 @@
+version: '1.0'
+description: Sistema de ações para guidelines do Code-Brain
+
+# Definição das ações disponíveis
+actions:
+  git:
+    # Ações de feature
+    feature:
+      start:
+        description: Iniciar nova feature
+        requires:
+          - git/workflow-template.md
+          - git/commit-convention.md
+        steps:
+          - validate_branch_name
+          - create_branch
+          - setup_tracking
+        validation: strict
+
+      commit:
+        description: Realizar commit
+        requires:
+          - git/commit-convention.md
+        steps:
+          - validate_message
+          - check_files
+          - execute_commit
+        validation: strict
+
+    # Ações de PR
+    pr:
+      create:
+        description: Criar Pull Request
+        requires:
+          - git/pr-template.md
+          - git/guidelines.md#pr_rules
+        steps:
+          - validate_branch
+          - check_ci
+          - generate_pr
+        validation: strict
+
+      review:
+        description: Revisar Pull Request
+        requires:
+          - git/guidelines.md#review_rules
+        steps:
+          - check_changes
+          - validate_tests
+          - submit_review
+        validation: advisory
+
+    # Ações de merge
+    merge:
+      execute:
+        description: Realizar merge
+        requires:
+          - git/guidelines.md#merge_rules
+        steps:
+          - validate_approvals
+          - check_conflicts
+          - execute_merge
+        validation: strict
+
+# Hooks de validação
+hooks:
+  pre_action:
+    - load_requirements
+    - check_permissions
+    - validate_context
+  
+  post_action:
+    - validate_result
+    - log_execution
+    - cleanup
+
+# Exemplos de uso
+examples:
+  feature_start:
+    action: git.feature.start
+    params:
+      branch: feature/UC-001/login
+      base: develop
+    validation:
+      - branch_name
+      - base_branch
+
+  commit_changes:
+    action: git.feature.commit
+    params:
+      message: "feat(auth): implement login flow"
+      files: ["src/auth/*"]
+    validation:
+      - commit_message
+      - file_paths
+
+# Sistema de mensagens de erro
+errors:
+  branch_name:
+    code: GIT001
+    message: "Branch name must follow pattern: feature/UC-XXX/description"
+    fix: "Rename branch to match pattern"
+
+  commit_message:
+    code: GIT002
+    message: "Commit message must follow convention: type(scope): message"
+    fix: "Reword commit message"
+
+# Logs e métricas
+metrics:
+  collect:
+    - action_duration
+    - validation_results
+    - error_counts
+  store: metrics.yaml

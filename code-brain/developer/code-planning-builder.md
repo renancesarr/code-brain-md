@@ -49,6 +49,7 @@
 
 ---
 Resumo executivo:
+
 - Objetivo: ajustar X para Y em 3 passos.
 
 Plano:

@@ -1,0 +1,99 @@
+version: '1.0'
+description: Sistema de validação de conformidade com guidelines do Code-Brain
+
+# Regras de validação
+rules:
+  git:
+    # Validação de branches
+    branch:
+      pattern: "^feature/UC-[0-9]{3}/T[0-9]{3}$"
+      examples:
+        - feature/UC-001/T001
+      message: "Branch deve seguir padrão: feature/UC-XXX/TXXX"
+
+    # Validação de commits
+    commit:
+      message:
+        pattern: "^(feat|fix|docs|style|refactor|test|chore)\\(.+\\): .+$"
+        examples:
+          - "feat(auth): implementa login"
+        message: "Commit deve seguir convenção: type(scope): message"
+      
+      scope:
+        required: true
+        pattern: "^[a-z]+$"
+        message: "Scope deve ser em minúsculas"
+
+    # Validação de PRs
+    pr:
+      title:
+        pattern: "^\\[UC-[0-9]{3}\\] .+$"
+        examples:
+          - "[UC-001] Implementa autenticação"
+        message: "PR title deve seguir padrão: [UC-XXX] Descrição"
+      
+      template:
+        required_sections:
+          - Descrição
+          - Checklist
+          - Branch
+        message: "PR deve usar template padrão"
+
+    # Validação de merges
+    merge:
+      requirements:
+        - approved_pr
+        - passing_ci
+        - no_conflicts
+      message: "Merge requer PR aprovado, CI passing e sem conflitos"
+
+# Níveis de validação
+levels:
+  strict:
+    block_on_error: true
+    require_all_checks: true
+    
+  advisory:
+    block_on_error: false
+    require_all_checks: false
+
+# Checkers disponíveis
+checkers:
+  branch_name:
+    type: regex
+    rules: git.branch
+    
+  commit_message:
+    type: regex
+    rules: git.commit.message
+    
+  pr_format:
+    type: template
+    rules: git.pr
+    
+  merge_status:
+    type: requirements
+    rules: git.merge
+
+# Ações pós-validação
+actions:
+  on_success:
+    - log_validation
+    - proceed_action
+    
+  on_error:
+    - log_error
+    - show_example
+    - block_action
+
+# Sistema de relatórios
+reporting:
+  enabled: true
+  format: yaml
+  file: validation-report.yaml
+  fields:
+    - timestamp
+    - action
+    - rule
+    - result
+    - errors

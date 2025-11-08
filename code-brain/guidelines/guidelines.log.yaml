@@ -1,0 +1,31 @@
+version: '1.0'
+description: Log de uso das guidelines do Code-Brain
+
+guidelines_usage:
+  - timestamp: '2025-11-07T14:30:00Z'
+    module: git
+    sections: 
+      - workflow
+      - commit
+    context: standard
+    action: validate_pr
+    result: success
+    validation:
+      schema: true
+      dependencies: true
+    files_affected:
+      - git/workflow-template.md
+      - git/commit-convention.md
+    
+  - timestamp: '2025-11-07T14:35:00Z'
+    module: git
+    sections:
+      - guidelines
+    context: minimal
+    action: check_rules
+    result: success
+    validation:
+      schema: true
+      dependencies: true
+    files_affected:
+      - git/guidelines.md

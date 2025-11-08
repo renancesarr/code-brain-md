@@ -1,0 +1,55 @@
+version: '1.0'
+description: Schema para guidelines modulares do Code-Brain
+
+# Definição dos módulos disponíveis
+modules:
+  git:
+    path: git/
+    sections:
+      workflow:
+        file: workflow-template.md
+        requires: [guidelines]
+      commit:
+        file: commit-convention.md
+        requires: []
+      pr:
+        file: pr-template.md
+        requires: [commit]
+      guidelines:
+        file: guidelines.md
+        requires: []
+      commands:
+        file: commands-log-template.yaml
+        requires: [workflow]
+
+# Contextos de carregamento
+contexts:
+  minimal:
+    - guidelines
+  standard:
+    - guidelines
+    - workflow
+    - commit
+  complete:
+    - guidelines
+    - workflow
+    - commit
+    - pr
+    - commands
+
+# Validações obrigatórias
+validations:
+  - schema_version
+  - required_sections
+  - file_exists
+  - circular_dependencies
+
+# Formato de logs
+logs:
+  format: yaml
+  required_fields:
+    - timestamp
+    - module
+    - sections
+    - context
+    - action

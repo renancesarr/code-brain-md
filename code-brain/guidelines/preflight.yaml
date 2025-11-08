@@ -1,0 +1,142 @@
+version: '1.0'
+description: Sistema de preflight checks para desenvolvedores do Code-Brain
+
+# Tipos de desenvolvedores e níveis de checagem
+developer_types:
+  human:
+    preflight_level: standard
+    auto_fix: suggest
+    block_on_error: true
+    
+  ai_agent:
+    preflight_level: strict
+    auto_fix: execute
+    block_on_error: true
+
+# Pontos de checagem obrigatória
+preflight_points:
+  pre_commit:
+    checks:
+      - workspace_clean
+      - branch_valid
+      - files_staged
+      - commit_message
+    block_on_failure: true
+
+  pre_push:
+    checks:
+      - commits_valid
+      - tests_passing
+      - lint_clean
+      - no_secrets
+    block_on_failure: true
+
+  pre_pr:
+    checks:
+      - branch_updated
+      - conflicts_resolved
+      - docs_updated
+      - tests_coverage
+    block_on_failure: true
+
+  pre_merge:
+    checks:
+      - approvals_complete
+      - ci_passing
+      - coverage_maintained
+      - security_scan
+    block_on_failure: true
+
+# Checagens específicas por contexto
+context_checks:
+  feature_dev:
+    required:
+      - branch_naming
+      - commit_style
+      - test_coverage
+      - docs_updated
+    optional:
+      - performance_impact
+      - complexity_check
+
+  bugfix:
+    required:
+      - regression_tests
+      - root_cause
+      - fix_scope
+    optional:
+      - similar_bugs
+      - prevention_plan
+
+  documentation:
+    required:
+      - spelling_grammar
+      - links_valid
+      - examples_work
+    optional:
+      - clarity_score
+      - completeness_check
+
+# Sistema de autocorreção
+auto_fix:
+  branch_name:
+    check: "^feature/UC-\\d{3}/T\\d{3}$"
+    fix_template: "feature/UC-{usecase}/T{task}"
+    
+  commit_message:
+    check: "^(feat|fix|docs|style|refactor|test|chore)\\(.+\\): .+$"
+    fix_template: "{type}({scope}): {message}"
+    
+  code_style:
+    tool: prettier
+    config: .prettierrc
+    auto_apply: true
+
+# Relatórios e logs
+reporting:
+  log_file: preflight.log
+  format: yaml
+  fields:
+    - timestamp
+    - developer_id
+    - check_point
+    - results
+    - fixes_applied
+
+# Integração com guidelines
+guidelines_integration:
+  load_relevant:
+    - workflow
+    - conventions
+    - requirements
+  validate_against: strict
+
+# Mensagens e sugestões
+messages:
+  error_templates:
+    branch_name: |
+      Branch '{branch}' não segue convenção.
+      Esperado: feature/UC-XXX/TXXX
+      Exemplo: feature/UC-001/T001
+    
+    commit_msg: |
+      Commit '{message}' não segue convenção.
+      Esperado: type(scope): message
+      Exemplo: feat(auth): implementa login
+    
+    missing_tests: |
+      Testes insuficientes.
+      Esperado: Cobertura >= 80%
+      Atual: {coverage}%
+
+# Hooks de CI/CD
+ci_hooks:
+  pre_build:
+    - run_preflight
+    - validate_guidelines
+    - check_requirements
+    
+  post_build:
+    - validate_artifacts
+    - update_metrics
+    - notify_status

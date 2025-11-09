@@ -6,10 +6,11 @@ Validates YAML blocks in Markdown files and general Markdown syntax
 
 import sys
 import re
-import yaml
-from pathlib import Path
 import argparse
-import subprocess
+from pathlib import Path
+from typing import Iterable, List, Tuple
+
+import yaml
 
 class ValidationError(Exception):
     """Custom exception for validation errors"""
@@ -31,19 +32,33 @@ def validate_yaml(content):
     except yaml.YAMLError as e:
         return False, str(e)
 
-def validate_markdown(file_path):
-    """Validate markdown using markdownlint"""
-    try:
-        result = subprocess.run(
-            ['markdownlint', file_path],
-            capture_output=True,
-            text=True
-        )
-        if result.returncode != 0:
-            return False, result.stdout
-        return True, None
-    except FileNotFoundError:
-        return False, "markdownlint not found. Install with: npm install -g markdownlint-cli"
+MAX_MD_LINE_LENGTH = 0  # 0 = disabled
+
+
+def validate_markdown_rules(content: str, file_path: Path) -> Tuple[bool, List[str]]:
+    """Basic Markdown linting without external deps."""
+    errors: List[str] = []
+    lines = content.splitlines()
+
+    # First non-empty line must be a heading
+    for line in lines:
+        if line.strip():
+            if not line.startswith("#"):
+                errors.append("First non-empty line must be a Markdown heading (# ...).")
+            break
+
+    for idx, line in enumerate(lines, start=1):
+        raw = line
+        if raw.endswith(" ") or raw.endswith("\t"):
+            errors.append(f"Line {idx}: trailing whitespace.")
+        if "\t" in raw:
+            errors.append(f"Line {idx}: tab character found; use spaces only.")
+        if MAX_MD_LINE_LENGTH and len(raw) > MAX_MD_LINE_LENGTH:
+            errors.append(
+                f"Line {idx}: exceeds {MAX_MD_LINE_LENGTH} characters."
+            )
+
+    return (len(errors) == 0), errors
 
 def validate_file(file_path):
     """Validate both YAML and Markdown in a file"""
@@ -62,10 +77,10 @@ def validate_file(file_path):
         if not yaml_valid:
             errors.append(f"YAML validation error: {yaml_error}")
 
-    # Validate Markdown
-    md_valid, md_error = validate_markdown(file_path)
+    # Validate Markdown rules
+    md_valid, md_errors = validate_markdown_rules(content, Path(file_path))
     if not md_valid:
-        errors.append(f"Markdown validation error: {md_error}")
+        errors.extend([f"Markdown validation error: {err}" for err in md_errors])
 
     return len(errors) == 0, errors
 
@@ -79,6 +94,16 @@ def validate_yaml_file(file_path):
         return True, None
     except Exception as e:
         return False, [f"Could not validate YAML file {file_path}: {str(e)}"]
+
+def expand_targets(pattern: str) -> Iterable[Path]:
+    """Yield concrete paths for a given pattern or explicit path."""
+    path = Path(pattern)
+    if path.exists() or path.is_absolute():
+        yield path
+    else:
+        # glob handles relative and wildcard patterns
+        yield from Path().glob(pattern)
+
 
 def main():
     parser = argparse.ArgumentParser(description="Validate YAML and Markdown files")
@@ -96,7 +121,9 @@ def main():
 
     exit_code = 0
     for pattern in args.files:
-        for file_path in Path().glob(pattern):
+        matched = False
+        for file_path in expand_targets(pattern):
+            matched = True
             print(f"\nValidating {file_path}...")
             
             try:
@@ -119,6 +146,10 @@ def main():
             except Exception as e:
                 exit_code = 1
                 print(f"❌ Unexpected error: {str(e)}")
+
+        if not matched:
+            exit_code = 1
+            print(f"❌ No files matched pattern: {pattern}")
 
     sys.exit(exit_code)
 

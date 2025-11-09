@@ -1,104 +1,92 @@
 #!/bin/bash
 # Validate-docs script for Code-Brain
-# Integrates YAML and Markdown validation into the workflow
+# Runs YAML + Markdown validation for core documents.
 
-set -e
+set -euo pipefail
 
-# Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+PY_VALIDATOR="${SCRIPT_DIR}/validate-docs.py"
 
-# Colors for output
+# Default coverage (executed when no args are passed)
+DEFAULT_YAML_FILES=(
+    "${PROJECT_ROOT}/context.yaml"
+    "${PROJECT_ROOT}/context-index.yaml"
+    "${PROJECT_ROOT}/prompt.yaml"
+    "${PROJECT_ROOT}/code-brain/to-do/tasks.yaml"
+)
+
+DEFAULT_MD_FILES=(
+    "${PROJECT_ROOT}/AGENTS.md"
+    "${PROJECT_ROOT}/prompt.md"
+    "${PROJECT_ROOT}/project-guide.md"
+    "${PROJECT_ROOT}/backlog_anatomico_unificado_padronizado.md"
+    "${PROJECT_ROOT}/code-brain/developer/developer-notes.template.md"
+    "${PROJECT_ROOT}/code-brain/project-guide.template.md"
+    "${PROJECT_ROOT}/code-brain/guidelines/pipeline-insight-usecase-todo.md"
+)
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Check dependencies
-check_dependencies() {
-    local missing_deps=()
-    
-    # Check Python
-    if ! command -v python3 &>/dev/null; then
-        missing_deps+=("python3")
-    fi
-    
-    # Check pip packages
-    if ! python3 -c "import yaml" 2>/dev/null; then
-        missing_deps+=("pyyaml (pip install pyyaml)")
-    fi
-    
-    # Check markdownlint
-    if ! command -v markdownlint &>/dev/null; then
-        missing_deps+=("markdownlint-cli (npm install -g markdownlint-cli)")
-    fi
-    
-    if [ ${#missing_deps[@]} -ne 0 ]; then
+require_deps() {
+    local missing=()
+    command -v python3 >/dev/null 2>&1 || missing+=("python3")
+    python3 -c "import yaml" >/dev/null 2>&1 || missing+=("pyyaml (python3 -m pip install pyyaml)")
+    command -v yamllint >/dev/null 2>&1 || missing+=("yamllint (python3 -m pip install --user yamllint)")
+
+    if [ ${#missing[@]} -ne 0 ]; then
         echo -e "${RED}Missing dependencies:${NC}"
-        printf '%s\n' "${missing_deps[@]/#/  - }"
+        printf '  - %s\n' "${missing[@]}"
         exit 1
     fi
 }
 
-# Validate a documentation file
-validate_doc() {
-    local file="$1"
-    echo -e "\n${YELLOW}Validating document: ${file}${NC}"
-    
-    # Run Python validator
-    if python3 "${SCRIPT_DIR}/validate-docs.py" "$file"; then
-        echo -e "${GREEN}✓ Document validation passed${NC}"
-        return 0
-    else
-        echo -e "${RED}✗ Document validation failed${NC}"
-        return 1
-    fi
+run_yaml_checks() {
+    local files=("$@")
+    [ ${#files[@]} -eq 0 ] && return 0
+
+    echo -e "${YELLOW}YAML validation${NC}"
+    yamllint "${files[@]}"
 }
 
-# Validate context files
-validate_context() {
-    echo -e "\n${YELLOW}Validating context files...${NC}"
-    
-    local context_files=(
-        "${PROJECT_ROOT}/context.yaml"
-        "${PROJECT_ROOT}/context-index.yaml"
-    )
-    
-    local failed=0
-    
-    for file in "${context_files[@]}"; do
-        echo -e "\nChecking ${file}..."
-        if python3 "${SCRIPT_DIR}/validate-docs.py" --yaml-only "$file"; then
-            echo -e "${GREEN}✓ Context file validation passed${NC}"
+run_markdown_checks() {
+    local files=("$@")
+    [ ${#files[@]} -eq 0 ] && return 0
+
+    echo -e "${YELLOW}Markdown validation${NC}"
+    python3 "${PY_VALIDATOR}" "${files[@]}"
+}
+
+process_targets() {
+    local yaml_targets=()
+    local md_targets=()
+
+    for target in "$@"; do
+        if [[ "$target" == *.yml || "$target" == *.yaml ]]; then
+            yaml_targets+=("$target")
         else
-            echo -e "${RED}✗ Context file validation failed${NC}"
-            failed=1
+            md_targets+=("$target")
         fi
     done
-    
-    return $failed
+
+    run_yaml_checks "${yaml_targets[@]}"
+    run_markdown_checks "${md_targets[@]}"
 }
 
-# Main function
 main() {
-    # Check dependencies first
-    check_dependencies
-    
-    # Validate context files by default
-    validate_context
-    
-    # If files are specified, validate them
+    require_deps
+
     if [ $# -gt 0 ]; then
-        for file in "$@"; do
-            if [[ -f "$file" ]]; then
-                validate_doc "$file"
-            else
-                echo -e "${RED}Error: File not found - ${file}${NC}"
-                exit 1
-            fi
-        done
+        process_targets "$@"
+    else
+        run_yaml_checks "${DEFAULT_YAML_FILES[@]}"
+        run_markdown_checks "${DEFAULT_MD_FILES[@]}"
     fi
+
+    echo -e "${GREEN}All validations completed.${NC}"
 }
 
-# Run main function with all arguments
 main "$@"

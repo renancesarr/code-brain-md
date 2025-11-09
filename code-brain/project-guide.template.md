@@ -1,25 +1,68 @@
-# PROJECT GUIDE
+# PROJECT GUIDE — <Nome do Projeto>
 
-## Introduction
-    Descreve a ideia junto objetivo do projeto, e quais sao os resultados esperados
+> Este template referencia `AGENTS.md` e `code-brain/guidelines/pipeline-insight-usecase-todo.md`.
+> Preencha sempre com base em insights (`IN-XXXX`) e use-cases (`UC-XXXX`) rastreáveis.
 
-## Features
-    Descreve os requisitos funcionais e nao-funcionais conjuto, montando o escopo do projeto.
+## 1. Introduction
 
-## MVP
-    Divide o projeto em produtos minimos que já podem ser validados
+- **Visão geral**: descreva o problema e o objetivo estratégico.
+- **Resultados esperados**: liste benefícios mensuráveis (ex.: documentação viva, automação, rastreabilidade).
+- **Escopo inicial**: limite o que faz parte do projeto nesta fase.
 
-### [mvp-n] <!-- pode ser gerado mvp-1 mvp-2 mvp-3 de acordo com a quantidade de mvps que forem encontrados -->
-#### Features MVP
-    Descreve os requisitos funcionais e nao-funcionais conjuto, montando o escopo deste mvp
-#### Aceite do MVP
-    Descreve os criterios de aceite do MVP
+## 2. Features
 
-## Arquitetura
-    Descreve a arquitetura doe soluções, tecnologias que seram usadas e a arquitetura de software do projeto
+### 2.1 Requisitos Funcionais
+1. `[UC-0001]` Descreva a funcionalidade e seu impacto.
+2. `[UC-0002]` ...
 
+### 2.2 Requisitos Não-Funcionais
+1. Performance/SLAs
+2. Consistência de documentação
+3. Segurança / compliance
 
-## KPI do projeto
-    Deescreve as métricas que seram usadas para medir o sucesso do projeto
+## 3. MVP Roadmap
 
-<!-- faça ajustes necessarios para cada projeto, este documento é uma documentaçào que vai guiar o desenvolvimento do projeto -->
+Explique como o projeto se divide em MVPs incrementais.
+
+### 3.1 MVP-1 — <nome>
+- **Objetivo**:
+- **Features incluídas** (listar `UC-XXXX`):
+- **Critérios de aceite**:
+
+### 3.2 MVP-2 — <nome>
+- ...
+
+> Adicione mais MVPs conforme necessário.
+
+## 4. Arquitetura
+
+### 4.1 Componentes Principais
+1. **Context Manager** — responsabilidades / integrações.
+2. **Pipeline Cognitivo** — relação INSIGHT→USE-CASE→TO-DO.
+3. **Template Engine** — geração/validação de documentos.
+4. **Integration Layer** — Git, CI/CD, métricas.
+
+### 4.2 Tecnologias
+- Linguagens, frameworks, ferramentas de validação.
+- Dependências externas e políticas de segurança.
+
+## 5. KPI e Métricas
+
+### 5.1 Métricas de Processo
+- Tempo por use-case, qualidade de documentação, taxa de retrabalho etc.
+
+### 5.2 Métricas de Resultado
+- Onboarding, custo cognitivo, qualidade percebida.
+
+### 5.3 Métricas de Impacto
+- Satisfação da equipe, velocidade de entrega, manutenção.
+
+## 6. Governança e Fluxo Operacional
+
+- **Pipeline**: referencie etapas do guideline INSIGHT→USE-CASE→TO-DO.
+- **Validações**: script `code-brain/scripts/validate-docs.sh`, testes específicos.
+- **Documentação obrigatória**: logs IA, backlog anatômico, templates aplicados.
+
+---
+
+> Sempre atualize este guia quando novos MVPs, métricas ou componentes forem aprovados.

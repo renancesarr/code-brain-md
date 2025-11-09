@@ -1,6 +1,6 @@
 # Backlog Anatômico Unificado — MVP-1
 
-_Atualizado: 2025-11-08_
+_Atualizado: 2025-11-08 19:31 UTC_
 
 ## Visão Geral
 
@@ -9,8 +9,8 @@ O backlog anatômico consolida o MVP-1 do Code-Brain em quatro trilhas principai
 | Use Case | Objetivo | Tarefas | Status |
 | --- | --- | --- | --- |
 | UC-0001 | Sincronizar o gerenciador de contexto (`context.yaml` ↔ `context-index.yaml`) | T-0001 | Done |
-| UC-0002 | Mapear o pipeline cognitivo INSIGHT→USE-CASE→TO-DO | T-0002 | Todo |
-| UC-0003 | Consolidar templates e validadores de documentação | T-0003, T-0005 | Todo |
+| UC-0002 | Mapear o pipeline cognitivo INSIGHT→USE-CASE→TO-DO | T-0002 | Done |
+| UC-0003 | Consolidar templates e validadores de documentação | T-0003, T-0005 | Done |
 | UC-0004 | Estabelecer o workflow Git padrão (branch, PR, validações) | T-0004 | Todo |
 
 ## Detalhamento Anatômico
@@ -25,23 +25,24 @@ O backlog anatômico consolida o MVP-1 do Code-Brain em quatro trilhas principai
 - **Status atual**: ✅ Concluído em 2025-11-08; lacuna do backlog anatômico resolvida com este arquivo e registradas validações extras no contexto.
 
 ### UC-0002 — Pipeline Cognitivo INSIGHT→USE-CASE→TO-DO
-- **Tasks**: T-0002 (principal).
+- **Tasks**: T-0002 (concluída).
 - **Objetivo**: descrever, em guia operacional, como insights se transformam em use cases e, finalmente, em tarefas rastreáveis.
-- **Entradas necessárias**: project-guide.md (pipeline cognitivo), AGENTS.md (pipeline operacional), logs recentes.
-- **Saídas esperadas**:
-  - Documento com entradas/saídas/responsáveis por etapa.
-  - Regras de nomenclatura de IDs e dependências atualizadas.
-  - Referências cruzadas no AGENTS ou prompt.md.
-- **Situação**: ⏳ Aguardando conclusão de T-0001.
+- **Entradas utilizadas**: `project-guide.md`, `AGENTS.md`, backlog anatômico e logs IA.
+- **Entregas**:
+  - `code-brain/guidelines/pipeline-insight-usecase-todo.md` com entradas/saídas/responsáveis e checklist.
+  - Referência adicionada ao `prompt.md` para garantir uso do pipeline.
+  - Atualizações no `context.yaml` e `tasks.yaml` refletindo a conclusão.
+- **Situação**: ✅ Finalizado em 2025-11-08; pipeline pronto para alimentar UC-0003/UC-0004.
 
 ### UC-0003 — Templates & Validação de Documentação
-- **Tasks**: T-0003 (templates), T-0005 (validadores).
-- **Objetivo**: garantir consistência dos templates (developer-notes, project guide, workflows) e criar validadores YAML/Markdown obrigatórios.
-- **Critérios**:
-  - Templates possuem instruções claras e campos obrigatórios.
-  - Exemplos preenchidos garantem entendimento.
-  - Validadores (ex.: `yamllint`, markdownlint) integram o estágio TEST do pipeline.
-- **Situação**: ⏳ Pendentes; dependem da finalização de T-0001/T-0002 para herdar contexto atualizado.
+- **Tasks**: T-0003 (templates), T-0005 (validadores) — concluídas.
+- **Objetivo**: garantir consistência dos templates (developer-notes, project guide) e criar validadores YAML/Markdown obrigatórios.
+- **Entregas**:
+  - `code-brain/developer/developer-notes.template.md` atualizado com instruções operacionais, checklist de IDs e orientação de validação.
+  - `code-brain/project-guide.template.md` reescrito seguindo a estrutura oficial do guia e pipeline cognitivo.
+  - `code-brain/scripts/validate-docs.sh` + `validate-docs.py` cobrindo `yamllint` e lint básico de Markdown (sem dependências externas).
+  - Referência ao script incluída no `prompt.md` e estado registrado no `context.yaml`.
+- **Situação**: ✅ Finalizado em 2025-11-08; próximos passos focam nas integrações Git e no armazenamento dedicado de `IN/UC`.
 
 ### UC-0004 — Workflow Git Padronizado
 - **Task**: T-0004.
@@ -56,8 +57,8 @@ O backlog anatômico consolida o MVP-1 do Code-Brain em quatro trilhas principai
 - **Situação**: ⏳ Aguardando.
 
 ## Próximas Ações Prioritárias
-1. Finalizar a documentação do pipeline INSIGHT→USE-CASE→TO-DO (T-0002).
-2. Revisar/atualizar templates essenciais e conectar validadores ao pipeline (T-0003/T-0005).
-3. Consolidar workflow Git e scripts de validação (T-0004).
+1. Consolidar workflow Git e scripts de validação (T-0004).
+2. Definir repositório/estrutura física para documentos `UC-XXXX` e `IN-XXXX`.
+3. Integrar o script `validate-docs.sh` ao preflight/CI futuro.
 
 > Qualquer atualização neste backlog deve ser refletida simultaneamente no `tasks.yaml` e registrada em um log IA seguindo o template oficial.

@@ -1,7 +1,7 @@
 ---
 meta:
   version: "2.0"
-  updated_at: "2025-11-08T13:11:13Z"
+  updated_at: "2025-11-08T16:35:48Z"
   id_format: "^T-\\d{4}$"
 
 tasks:
@@ -42,7 +42,7 @@ tasks:
     description: >-
       Transformar o pipeline cognitivo do project-guide em instruções e
       artefatos que ligam insights a tarefas executáveis.
-    status: "todo"
+    status: "done"
     priority: "P0"
     related_use_case: "UC-0002"
     decisions: []
@@ -66,14 +66,15 @@ tasks:
     rollback_plan: "Reverter documentação para versões anteriores no Git."
     assignees:
       - "code-brain-ai"
-    updated_at: "2025-11-08T12:23:37Z"
+    updated_at: "2025-11-08T16:35:48Z"
+    completed_at: "2025-11-08T16:35:48Z"
 
   - id: "T-0003"
     title: "Consolidar templates fundamentais"
     description: >-
       Garantir que developer-notes, project-guide e demais templates suportem o
       fluxo de documentação automática do MVP-1.
-    status: "todo"
+    status: "done"
     priority: "P1"
     related_use_case: "UC-0003"
     decisions: []
@@ -94,7 +95,8 @@ tasks:
     rollback_plan: "Restaurar templates anteriores preservando comentários."
     assignees:
       - "code-brain-ai"
-    updated_at: "2025-11-08T12:23:37Z"
+    updated_at: "2025-11-08T19:31:40Z"
+    completed_at: "2025-11-08T19:31:40Z"
 
   - id: "T-0004"
     title: "Estabelecer integração Git básica"
@@ -130,7 +132,7 @@ tasks:
     description: >-
       Criar validadores YAML/Markdown que assegurem a conformidade estrutural
       mínima exigida pelo MVP-1.
-    status: "todo"
+    status: "done"
     priority: "P1"
     related_use_case: "UC-0003"
     decisions: []
@@ -152,4 +154,5 @@ tasks:
       Remover validadores e restaurar estado anterior do pipeline.
     assignees:
       - "code-brain-ai"
-    updated_at: "2025-11-08T12:23:37Z"
+    updated_at: "2025-11-08T19:31:40Z"
+    completed_at: "2025-11-08T19:31:40Z"

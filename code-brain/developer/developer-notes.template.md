@@ -1,39 +1,37 @@
-# IA Change Template
+# IA Change Template — Code-Brain
 
-> Salvar como `code-brain/developer/logs-ai-code/<timestamp>-ia-code.md`
+> Salve como `code-brain/developer/logs-ai-code/<timestamp>-ia-code.md`.
+> Cite sempre os IDs envolvidos (`IN-XXXX`, `UC-XXXX`, `T-XXXX`) e os validadores executados.
 
 ## 1. Contexto consumido
 
-Uma lista estruturada com tudo que a IA (ou o autor) "consumiu" para produzir a alteração.
-Preencha esta seção com entradas claras e objetivas — ela é usada para auditoria, revisão humana e para facilitar reprodução.
+Liste tudo o que foi lido (arquivos, logs, solicitações). A ordem deve seguir o pipeline `context.yaml → context-index.yaml → AGENTS.md → project-guide → backlog/logs`.
 
 ## 2. Objetivo da alteração
 
-* resumo (4-6 linhas):
-* escopo (inclui/exclui):
+* resumo (4-6 linhas): explique por que a iteração existe e qual resultado concreto é esperado.
+* escopo (inclui/exclui): detalhe explicitamente o que faz parte ou não desta entrega.
 
 ## 3. Decisões e justificativas
 
-* alternativas:
-
-* decisão:
-
-* riscos/limitações (com mitigação):
+* alternativas: descreva opções avaliadas (pelo menos 2) e impactos.
+* decisão: qual caminho foi escolhido e por quê (alinhado ao AGENTS/prompt).
+* riscos/limitações (com mitigação): cite incertezas conhecidas e como tratá-las.
 
 ## 4. Implementação
 
 * arquivos gerados:
 * arquivos alterados:
-* notas de implementação:
+* notas de implementação: destaque estruturas criadas, scripts rodados, validações (`code-brain/scripts/validate-docs.sh`, testes específicos etc.).
 
 ## 5. Revisão humana
 
-* dúvidas/trechos críticos:
+* dúvidas/trechos críticos: perguntas para revisão futura ou itens que pedem confirmação.
 
 ## 6. Follow-ups
 
-* tasks abertas/atualizadas:
+* tasks abertas/atualizadas: referencie `T-XXXX`, `UC-XXXX` e status atual.
 
 ## 7. Next Steps
 
-* Quais tarefas devem ser avaliadas ou executadas a seguir.
+Liste tarefas concretas para a próxima iteração (mínimo 2 itens), citando dependências quando existirem.

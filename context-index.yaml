@@ -1,3 +1,4 @@
+---
 # Context Index - Mapeamento estrutural do projeto Code-Brain
 # Versão MVP-1: Framework Base
 
@@ -6,7 +7,9 @@ version: "1.0.0-mvp1"
 project:
   name: "Code-Brain"
   description: "Framework de desenvolvimento com IA integrada"
-  mission: "Criar um fluxo de trabalho inteligente que integra IA no processo de desenvolvimento"
+  mission: >-
+    Criar um fluxo de trabalho inteligente que integra IA no processo de
+    desenvolvimento
 
 directories:
   todo: "code-brain/to-do/"

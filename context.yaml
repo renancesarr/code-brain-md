@@ -4,7 +4,7 @@
 
 context:
   # Metadados do estado atual
-  last_update: "2025-11-08T13:11:13Z"
+  last_update: "2025-11-08T19:31:40Z"
   active_branch: "main"
   current_phase: "mvp-1"
 
@@ -12,17 +12,8 @@ context:
   active_tasks:
     current: []
     pending:
-      - id: "T-0002"
-        description: "Mapear pipeline INSIGHT→USE-CASE→TO-DO"
-        priority: 0
-      - id: "T-0003"
-        description: "Consolidar templates fundamentais"
-        priority: 1
       - id: "T-0004"
         description: "Estabelecer integração Git básica"
-        priority: 1
-      - id: "T-0005"
-        description: "Implementar validação básica de documentação"
         priority: 1
     completed:
       - id: "T-0001"
@@ -30,6 +21,21 @@ context:
         completed_at: "2025-11-08T13:11:13Z"
         outcome: >-
           Contexto sincronizado com index e backlog anatômico restaurado.
+      - id: "T-0002"
+        description: "Mapear pipeline INSIGHT→USE-CASE→TO-DO"
+        completed_at: "2025-11-08T16:35:48Z"
+        outcome: >-
+          Pipeline cognitivo documentado e referenciado no prompt/backlog.
+      - id: "T-0003"
+        description: "Consolidar templates fundamentais"
+        completed_at: "2025-11-08T19:31:40Z"
+        outcome: >-
+          Templates chaves atualizados com instruções alinhadas ao pipeline.
+      - id: "T-0005"
+        description: "Implementar validação básica de documentação"
+        completed_at: "2025-11-08T19:31:40Z"
+        outcome: >-
+          Script validate-docs em uso cobrindo YAML/Markdown essenciais.
 
   # Contexto de execução atual
   execution_context:
@@ -41,6 +47,8 @@ context:
       - "code-brain/project-guide.md"
       - "code-brain/to-do/tasks.yaml"
       - "backlog_anatomico_unificado_padronizado.md"
+      - "code-brain/guidelines/pipeline-insight-usecase-todo.md"
+      - "code-brain/scripts/validate-docs.sh"
 
     ai_processing:
       token_budget: 8000
@@ -122,15 +130,26 @@ context:
       - path: "backlog_anatomico_unificado_padronizado.md"
         status: "ok"
         note: "Consolidado com UC-0001..UC-0004 alinhados ao tasks.yaml."
+      - path: "code-brain/guidelines/pipeline-insight-usecase-todo.md"
+        status: "ok"
+        note: "Documento operacional do pipeline INSIGHT→USE-CASE→TO-DO."
+      - path: "code-brain/developer/developer-notes.template.md"
+        status: "ok"
+        note: "Template atualizado com checklist de validação/IDs."
+      - path: "code-brain/project-guide.template.md"
+        status: "ok"
+        note: "Estrutura completa alinhada ao guia oficial."
+      - path: "code-brain/scripts/validate-docs.sh"
+        status: "ok"
+        note: "Script padrão para yamllint + markdown checks."
 
   # Estado do ciclo atual
   cycle_state:
-    last_task_completed: "T-0001 — Orquestrar o gerenciador de contexto"
-    tasks_since_retrospective: 4
+    last_task_completed: "T-0005 — Implementar validação básica de documentação"
+    tasks_since_retrospective: 7
     pending_validations:
-      - "Validar sintaxe YAML em templates"
-      - "Verificar conformidade Markdown"
       - "Sincronizar workflow Git com preflight/checklist"
+      - "Definir repositório para arquivos IN/UC físicos"
 
   # MVP-1 Tracking
   mvp_tracking:
@@ -138,8 +157,11 @@ context:
       - "Sistema básico de context.yaml"
       - "Templates fundamentais"
       - "Backlog anatômico MVP-1"
+      - "Pipeline cognitivo documentado"
+      - "Templates revisados (developer-notes/project-guide)"
+      - "Validação básica de documentação"
     pending_features:
-      - "Validação de documentação básica"
       - "Estrutura completa de use-cases"
       - "Integração Git básica"
-    next_milestone: "Documentar pipeline INSIGHT→USE-CASE→TO-DO (T-0002)"
+    next_milestone: >-
+      Concluir integração Git (T-0004) e armazenar IN/UC dedicados

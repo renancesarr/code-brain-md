@@ -103,7 +103,7 @@ tasks:
     description: >-
       Aplicar o padrão feature/UC-XXX/TXXX, títulos de PR e validações citadas
       no project-guide e guidelines Git.
-    status: "todo"
+    status: "done"
     priority: "P1"
     related_use_case: "UC-0004"
     decisions: []
@@ -125,7 +125,58 @@ tasks:
     rollback_plan: "Reverter mudanças nas guidelines e scripts Git."
     assignees:
       - "code-brain-ai"
-    updated_at: "2025-11-08T12:23:37Z"
+    updated_at: "2025-11-09T01:37:51Z"
+    completed_at: "2025-11-09T01:37:51Z"
+
+  - id: "T-0006"
+    title: "Definir armazenamento para IN/UC"
+    description: >-
+      Criar diretórios oficiais e templates para insights (IN-XXXX) e
+      use-cases (UC-XXXX), atualizando context/index/backlog.
+    status: "done"
+    priority: "P1"
+    related_use_case: "UC-0002"
+    decisions: []
+    insights: []
+    depends_on:
+      - "T-0002"
+    acceptance_criteria:
+      - "Existem diretórios dedicados para IN e UC com README."
+      - "Templates oficiais publicados em code-brain/templates/."
+      - "context-index.yaml e context.yaml refletem a nova estrutura."
+    test_plan:
+      - "Executar `code-brain/scripts/validate-docs.sh`."
+    rollback_plan: "Remover diretórios e templates adicionados."
+    assignees:
+      - "code-brain-ai"
+    updated_at: "2025-11-09T02:30:00Z"
+    completed_at: "2025-11-09T02:30:00Z"
+
+  - id: "T-0007"
+    title: "Integrar validate-docs/preflight ao CI"
+    description: >-
+      Automatizar a execução de `code-brain/scripts/validate-docs.sh`
+      e `code-brain/guidelines/preflight.sh` no pipeline CI/preflight.
+    status: "done"
+    priority: "P1"
+    related_use_case: "UC-0004"
+    decisions: []
+    insights: []
+    depends_on:
+      - "T-0004"
+      - "T-0006"
+    acceptance_criteria:
+      - "Pipeline configura steps para validate-docs e preflight."
+      - "Logs CI armazenam relatórios gerados."
+      - "context.yaml registra a automação."
+    test_plan:
+      - "Executar pipeline CI/preflight em branch de teste."
+    rollback_plan: >-
+      Reverter alterações do pipeline/CI para configuração anterior.
+    assignees:
+      - "code-brain-ai"
+    updated_at: "2025-11-09T03:29:11Z"
+    completed_at: "2025-11-09T03:29:11Z"
 
   - id: "T-0005"
     title: "Implementar validação básica de documentação"

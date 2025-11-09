@@ -17,6 +17,8 @@ directories:
   git: "code-brain/git/"
   templates: "code-brain/templates/"
   data: "code-brain/data/"
+  insights: "code-brain/data/insights/"
+  use_cases: "code-brain/use-cases/"
 
 core_files:
   agents: "AGENTS.md"
@@ -32,11 +34,15 @@ schemas:
 patterns:
   ai_logs: "^[0-9]{10,}-ia-code\\.md$"
   dev_notes: "^[0-9]{8}-dev-notes\\.md$"
+  insights: "^IN-[0-9]{4}\\.md$"
+  use_cases: "^UC-[0-9]{4}\\.md$"
 
 templates:
   developer_notes: "code-brain/developer/developer-notes.template.md"
   project_guide: "code-brain/project-guide.template.md"
   workflow: "code-brain/git/workflow-template.md"
+  insight: "code-brain/templates/insight.template.md"
+  use_case: "code-brain/templates/use-case.template.md"
 
 required_structure:
   directories:
@@ -45,6 +51,8 @@ required_structure:
     - "code-brain/git/"
     - "code-brain/templates/"
     - "code-brain/data/"
+    - "code-brain/data/insights/"
+    - "code-brain/use-cases/"
   files:
     - "AGENTS.md"
     - "context.yaml"
@@ -52,6 +60,8 @@ required_structure:
     - "code-brain/project-guide.md"
     - "code-brain/to-do/tasks.yaml"
     - "code-brain/to-do/tasks.schema.json"
+    - "code-brain/data/insights/README.md"
+    - "code-brain/use-cases/README.md"
 
 governance:
   file_ownership:

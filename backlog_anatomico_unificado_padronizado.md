@@ -11,7 +11,8 @@ O backlog anatômico consolida o MVP-1 do Code-Brain em quatro trilhas principai
 | UC-0001 | Sincronizar o gerenciador de contexto (`context.yaml` ↔ `context-index.yaml`) | T-0001 | Done |
 | UC-0002 | Mapear o pipeline cognitivo INSIGHT→USE-CASE→TO-DO | T-0002 | Done |
 | UC-0003 | Consolidar templates e validadores de documentação | T-0003, T-0005 | Done |
-| UC-0004 | Estabelecer o workflow Git padrão (branch, PR, validações) | T-0004 | Todo |
+| UC-0004 | Estabelecer o workflow Git padrão (branch, PR, validações) | T-0004 | Done |
+| UC-0005 | Estruturar armazenamento de insights/use-cases | T-0006, T-0007 | Done |
 
 ## Detalhamento Anatômico
 
@@ -45,20 +46,27 @@ O backlog anatômico consolida o MVP-1 do Code-Brain em quatro trilhas principai
 - **Situação**: ✅ Finalizado em 2025-11-08; próximos passos focam nas integrações Git e no armazenamento dedicado de `IN/UC`.
 
 ### UC-0004 — Workflow Git Padronizado
-- **Task**: T-0004.
+- **Tasks**: T-0004 (workflow) e T-0007 (automação CI).
 - **Objetivo**: aplicar o padrão `feature/UC-XXX/TXXX`, títulos de PR `[UC-XXX] ...` e validar regras via scripts/guidelines.
-- **Artefatos já presentes**:
-  - `code-brain/git/workflow-template.md`
-  - `code-brain/guidelines/git/workflow-template.md`
-- **Próximos passos**:
-  1. Sincronizar template e guidelines (evitar drift).
-  2. Integrar checagens automáticas (preflight) ao pipeline TEST.
-  3. Documentar exemplos no project-guide/guidelines.
-- **Situação**: ⏳ Aguardando.
+- **Entregas**:
+  - `code-brain/git/workflow-template.md` reescrito com ciclo completo, checklist e referências.
+  - `code-brain/guidelines/git/guidelines.md` exige `preflight.sh` + `validate-docs.sh`.
+  - `code-brain/guidelines/preflight-cicd.md` executa `code-brain/scripts/validate-docs.sh` antes do `preflight.sh` em GitHub/GitLab/Jenkins.
+  - `context.yaml` e `tasks.yaml` registram as conclusões.
+- **Situação**: ✅ Finalizado em 2025-11-09; próximos passos focam em métricas e exemplos.
+
+### UC-0005 — Estrutura de Armazenamento IN/UC
+- **Tasks**: T-0006 — Definir armazenamento para IN/UC. T-0007 contribui ao conectar scripts ao CI.
+- **Objetivo**: criar diretórios oficiais e templates para registrar insights (`IN-XXXX`) e use-cases (`UC-XXXX`) de forma rastreável.
+- **Entregas**:
+  - `code-brain/data/insights/` e `code-brain/use-cases/` com README.
+  - Templates `code-brain/templates/insight.template.md` e `code-brain/templates/use-case.template.md`.
+  - Atualizações em `context-index.yaml`, `context.yaml`, `tasks.yaml`.
+- **Situação**: ✅ Finalizado em 2025-11-09; próximos passos incluem popular diretórios com registros reais e monitorar execuções no CI.
 
 ## Próximas Ações Prioritárias
-1. Consolidar workflow Git e scripts de validação (T-0004).
-2. Definir repositório/estrutura física para documentos `UC-XXXX` e `IN-XXXX`.
-3. Integrar o script `validate-docs.sh` ao preflight/CI futuro.
+1. Registrar os primeiros documentos `IN-XXXX`/`UC-XXXX` usando os novos templates.
+2. Automatizar exemplos e métricas do workflow Git dentro do project-guide/guidelines.
+3. Monitorar execuções do validate-docs/preflight nas pipelines e publicar relatórios.
 
 > Qualquer atualização neste backlog deve ser refletida simultaneamente no `tasks.yaml` e registrada em um log IA seguindo o template oficial.

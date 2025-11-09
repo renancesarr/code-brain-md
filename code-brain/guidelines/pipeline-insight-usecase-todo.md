@@ -6,8 +6,8 @@
 
 | Etapa   | Objetivo                                        | Entradas                            | Saídas Principais                                    | Responsável primário |
 | ------- | ----------------------------------------------- | ----------------------------------- | ---------------------------------------------------- | -------------------- |
-| INSIGHT | Capturar sinais, problemas ou oportunidades     | Logs, métricas, feedback, pesquisas | Registro `IN-0001` com contexto, impacto e evidências | Product / Pesquisa   |
-| USE-CASE| Converter insights em objetivos coesos          | `IN-XXXX`, project-guide, backlog   | Documento `UC-0001`, critérios e dependências        | Product + AI Planner |
+| INSIGHT | Capturar sinais, problemas ou oportunidades     | Logs, métricas, feedback, pesquisas | `code-brain/data/insights/IN-0001.md`                | Product / Pesquisa   |
+| USE-CASE| Converter insights em objetivos coesos          | `IN-XXXX`, project-guide, backlog   | `code-brain/use-cases/UC-0001.md` com critérios      | Product + AI Planner |
 | TO-DO   | Quebrar o use-case em tarefas executáveis       | `UC-XXXX`, context.yaml             | Entradas `T-0001` em `code-brain/to-do/tasks.yaml`   | AI Dev + Engineering |
 
 Checklist mínimo:
@@ -22,7 +22,7 @@ Checklist mínimo:
   - Fonte do insight (link de log, métrica, feedback).
   - Impacto esperado (qualitativo ou numérico).
   - Evidências já coletadas.
-- **Artefato**: entrada `IN-0001` seguindo regex `^IN-\d{4}$`. Guardar em `code-brain/data/` ou no backlog anatômico até existir um repositório dedicado.
+- **Artefato**: entrada `IN-0001` seguindo regex `^IN-\d{4}$`. Guardar em `code-brain/data/insights/IN-0001.md`.
 - **Responsável**: Product / Pesquisa (humano) ou IA com autorização explícita.
 - **Critérios para promover**:
   1. Insight validado (não duplicado, relevância confirmada).
@@ -35,7 +35,7 @@ Checklist mínimo:
 - **Objetivo**: explicar, em alto nível, o que precisa ser entregue para sanar o insight.
 - **Entradas**: `IN-XXXX`, `project-guide.md`, `context.yaml::mvp_tracking`, restrições do AGENTS.
 - **Artefatos obrigatórios**:
-  - Documento `UC-0001` (regex `^UC-\d{4}$`) conforme `context-index`.
+  - Documento `code-brain/use-cases/UC-0001.md` (regex `^UC-\d{4}$`) conforme `context-index`.
   - Critérios de aceite, indicadores de sucesso e dependências.
   - Rascunho de plano de validação (quais scripts/linters serão usados).
 - **Responsável**: Product + AI Planner (agente principal).

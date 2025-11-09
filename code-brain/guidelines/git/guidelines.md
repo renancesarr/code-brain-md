@@ -10,6 +10,8 @@ Este documento define o comportamento ético e operacional do agente cognitivo d
 - Atualizar `develop` e realizar **rebase interativo** antes do push.
 - Resolver conflitos localmente antes da PR.
 - Após merge, **deletar branches** locais e remotas.
+- Executar `code-brain/scripts/validate-docs.sh` + `code-brain/guidelines/preflight.sh`
+  (commit/push/pr) antes de abrir PR.
 
 ## 2. Convenções
 - **Branch:** `feature/<usecase>/<task-id>`
@@ -29,3 +31,4 @@ A IA deve:
 - Justificar cada commit em linguagem natural (`devlog.md`).
 - Nunca alterar histórico sem explicação no log.
 - Criar PRs automaticamente, mas **aguardar aprovação humana** antes do merge.
+- Registrar, no log IA, os resultados do `preflight.sh` e dos validadores executados.
